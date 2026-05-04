@@ -1,8 +1,14 @@
+import os
 from flask import Flask, jsonify
 import numpy as np
 import random
 
-app = Flask(__name__)
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+app = Flask(__name__, static_folder=ROOT_DIR, static_url_path='/')
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 class CliffWalkingEnv:
     def __init__(self):
