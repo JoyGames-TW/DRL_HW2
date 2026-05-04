@@ -1,0 +1,237 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --cliff-color: #ef4444;
+    --start-color: #8b5cf6;
+    --goal-color: #10b981;
+    --path-color: rgba(250, 204, 21, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top right, #1e293b, #0f172a);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.primary-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.primary-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+}
+
+.primary-btn:disabled {
+    background: #64748b;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#loading {
+    color: #fbbf24;
+    font-weight: 600;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.chart-container {
+    height: 400px;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.chart-container h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.policies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 900px) {
+    .policies {
+        grid-template-columns: 1fr;
+    }
+}
+
+.policy-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.badge.risk {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge.safe {
+    background: rgba(16, 185, 129, 0.2);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.grid-world {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.3);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.cell:hover {
+    filter: brightness(1.2);
+}
+
+.cell.path {
+    background: var(--path-color);
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+}
+
+.cell.start {
+    background: var(--start-color);
+    color: white;
+}
+
+.cell.start::after {
+    content: "S";
+    position: absolute;
+    font-size: 0.7rem;
+    top: 2px;
+    left: 2px;
+}
+
+.cell.goal {
+    background: var(--goal-color);
+    color: white;
+}
+
+.cell.goal::after {
+    content: "G";
+    position: absolute;
+    font-size: 0.7rem;
+    top: 2px;
+    left: 2px;
+}
+
+.cell.cliff {
+    background: var(--cliff-color);
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 5px,
+        rgba(0,0,0,0.2) 5px,
+        rgba(0,0,0,0.2) 10px
+    );
+    color: transparent;
+}
+
+.description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}

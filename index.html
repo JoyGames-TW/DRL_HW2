@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cliff Walking RL Visualization comparing Q-Learning and SARSA">
+    <title>Cliff Walking: Q-Learning vs SARSA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cliff Walking Reinforcement Learning</h1>
+            <p>Comparing Off-policy (Q-learning) and On-policy (SARSA) algorithms</p>
+        </header>
+
+        <main>
+            <div class="controls card glass">
+                <button id="trainBtn" class="primary-btn">Train Agents & Run Simulation</button>
+                <div id="loading" class="hidden">Training in progress (averaging over 20 runs)... Please wait.</div>
+            </div>
+
+            <div id="results" class="hidden">
+                <div class="chart-container card glass">
+                    <h2>Learning Performance (Total Reward per Episode)</h2>
+                    <canvas id="rewardChart"></canvas>
+                </div>
+
+                <div class="policies">
+                    <div class="policy-card card glass">
+                        <h2>Q-Learning Policy (Off-policy)</h2>
+                        <div class="badge risk">Risk-Seeking (Optimal Path)</div>
+                        <div id="qGrid" class="grid-world"></div>
+                        <p class="description">Q-learning learns the optimal path right along the edge of the cliff. It assumes the agent will always take the best action in the future, ignoring the exploration risk.</p>
+                    </div>
+
+                    <div class="policy-card card glass">
+                        <h2>SARSA Policy (On-policy)</h2>
+                        <div class="badge safe">Conservative (Safe Path)</div>
+                        <div id="sarsaGrid" class="grid-world"></div>
+                        <p class="description">SARSA takes the epsilon-greedy exploration into account during updates. It learns a safer path further away from the cliff to avoid massive penalties.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
